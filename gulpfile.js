@@ -6,7 +6,7 @@ var gulp = require('gulp'),
 //scripts task
 //Uglifies JS
 gulp.task('scripts', function(){
-	gulp.src('js/*.js')
+	gulp.src('**/js/*.js')
 	.pipe(uglify())
 	.pipe(gulp.dest('build/js'))
 });
@@ -14,8 +14,8 @@ gulp.task('scripts', function(){
 //watch task
 //watches JS AND CSS
 gulp.task('watch', function(){
-	gulp.watch('js/*.js', ['scripts']);
-	gulp.watch('css/*.css', ['styles']);
+	gulp.watch('**/js/*.js', ['scripts']);
+	gulp.watch('**/css/*.css', ['styles']);
 	gulp.watch('index.html', ['minify']);
 	gulp.watch('**/images/*', ['imagemin']);
 });
@@ -23,7 +23,7 @@ gulp.task('watch', function(){
 //styles task
 //uglify CSS
 gulp.task('styles', function(){
-	gulp.src('css/*.css')
+	gulp.src('**/css/*.css')
 	.pipe(uglifycss())
 	.pipe(gulp.dest('build/css'))
 	.on('error', console.error.bind(console))
