@@ -436,8 +436,6 @@ var resizePizzas = function(size) {
         default:
           console.log("bug in sizeSwitcher");
       }
-    }
-
   // Iterates through pizza elements on the page and changes their widths
   var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
   function changePizzaSizes(size) {
@@ -445,7 +443,7 @@ var resizePizzas = function(size) {
       randomPizzas[i].style.width = newWidth + "%";
     }
   }
-
+}
   changePizzaSizes(size);
 
   // User Timing API is awesome
