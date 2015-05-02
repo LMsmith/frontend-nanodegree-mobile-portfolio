@@ -432,29 +432,25 @@ var resizePizzas = function(size) {
     function sizeSwitcher (size) {
       switch(size) {
         case "1":
-          return 0.25;
+          newWidth =  25;
         case "2":
-          return 0.3333;
+          newWidth = 33.3;
         case "3":
-          return 0.5;
+          newWidth = 50;
         default:
           console.log("bug in sizeSwitcher");
       }
+      return newWidth
     }
-
-    var newsize = sizeSwitcher(size);
-    var dx = (newsize - oldsize) * windowwidth;
-
-    return dx;
   }
 
   // Iterates through pizza elements on the page and changes their widths
   var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
+  var pizzaWidth =  randomPizzas[i].style.width;
   function changePizzaSizes(size) {
+    var newWidth =
     for (var i = 0; i <randomPizzas.length; i++) {
-      var dx = determineDx(randomPizzas[i], size);
-      var newwidth = (randomPizzas[i].offsetWidth + dx) + 'px';
-      randomPizzas[i].style.width = newwidth;
+      randomPizzas[i].style.width =  pizzaWidth + "%";
     }
   }
 
