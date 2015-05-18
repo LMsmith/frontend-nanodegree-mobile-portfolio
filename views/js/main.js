@@ -378,7 +378,7 @@ var pizzaElementGenerator = function(i) {
   pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
   pizzaImageContainer.classList.add("col-md-6");
 
-  pizzaImage.src = "build/img/pizza.png";
+  pizzaImage.src = "images/pizza.png";
   pizzaImage.classList.add("img-responsive");
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
@@ -432,24 +432,28 @@ var resizePizzas = function(size) {
     function sizeSwitcher (size) {
       switch(size) {
         case "1":
-          newWidth =  25;
+          return 0.25;
         case "2":
-          newWidth = 33.3;
+          return 0.3333;
         case "3":
-          newWidth = 50;
+          return 0.5;
         default:
           console.log("bug in sizeSwitcher");
       }
-      return newWidth
     }
+
+    var newsize = sizeSwitcher(size);
+    var dx = (newsize - oldsize) * windowwidth;
+
+    return dx;
   }
 
   // Iterates through pizza elements on the page and changes their widths
-  var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
-  var pizzaWidth =  randomPizzas.style.width;
   function changePizzaSizes(size) {
-    for (var i = 0; i <randomPizzas.length; i++) {
-      randomPizzas[i].style.width =  pizzaWidth + "%";
+    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
+      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
+      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
     }
   }
 
@@ -524,7 +528,7 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var i = 0; i < 200; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "build/img/pizza.png";
+    elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
