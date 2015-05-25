@@ -2,6 +2,7 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	uglifycss = require('gulp-uglifycss');
 	imagemin = require('gulp-imagemin');
+	jsdoc = require("gulp-jsdoc");
 
 //scripts task
 //Uglifies JS
@@ -37,4 +38,11 @@ gulp.task('imagemin', function(){
 	.pipe(gulp.dest('build/img'))
 });
 
-gulp.task('default', ['scripts', 'styles', 'watch', 'minify', 'imagemin']);
+//jsdoc task
+//creates JSDoc documentation from JS comments
+gulp.task('jsdoc', function(){
+	gulp.src("js/main.js")
+  .pipe(jsdoc('./documentation-output'))
+});
+
+gulp.task('default', ['jsdoc']);
