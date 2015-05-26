@@ -40,7 +40,7 @@ form {
   display: flex;
 }
 
-.randomPizzaContainer img, h4, ul {
+.randomPizzaContainer img, ul {
   will-change:translate;
   transform:translateZ(0);
 }
