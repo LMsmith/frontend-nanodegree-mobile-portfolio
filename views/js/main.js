@@ -1,43 +1,21 @@
-/**
-*Project description: (Part II):
-*Obtain a 60 fps framerate for pizza.html
+/*
+Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
+jank-free at 60 frames per second.
+
+There are two major issues in this code that lead to sub-60fps performance. Can
+you spot and fix both?
+
+
+Built into the code, you'll find a few instances of the User Timing API
+(window.performance), which will be console.log()ing frame rate data into the
+browser console. To learn more about User Timing API, check out:
+http://www.html5rocks.com/en/tutorials/webperformance/usertiming/
+
+Creator:
+Cameron Pittman, Udacity Course Developer
+cameron *at* udacity *dot* com
 */
 
-/**
-*Optimizations made:
-*revised resizePizzas and updatePositions functions to stop forced synchronous layouts
-*used Gulp.js to minify images, CSS and JS
-*inlined CSS
-*used JSDoc to create documentation
-*/
-
-/**
-*Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
-*jank-free at 60 frames per second.
-*
-*There are two major issues in this code that lead to sub-60fps performance. Can
-*you spot and fix both?
-*
-*
-*Built into the code, you'll find a few instances of the User Timing API
-*(window.performance), which will be console.log()ing frame rate data into the
-*browser console. To learn more about User Timing API, check out:
-*http://www.html5rocks.com/en/tutorials/webperformance/usertiming/
-*
-*Creator:
-*Cameron Pittman, Udacity Course Developer
-*cameron *at* udacity *dot* com
-*/
-
-/**
-*Additional resources used:
-*https://developers.google.com/speed/docs/insights/ConfigureViewport
-*– configure viewport to optimize experience on mobile devices
-*gulpjs.com - JS, CSS and images minified with Gulp.js (uglify, uglifycss and imagemin plugins)
-*https://www.youtube.com/user/LevelUpTuts – Gulp tutorial on LevelUpTuts youtube channel
-*http://usejsdoc.org/about-getting-started.html – documentation created with JSDoc 3
-*http://dev.w3.org/csswg/css-font-loading/
-*/
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
 var pizzaIngredients = {};
@@ -164,7 +142,7 @@ pizzaIngredients.crusts = [
   "Stuffed Crust"
 ];
 
-//Name generator pulled from http://saturdaykid.com/usernames/generator.html
+// Name generator pulled from http://saturdaykid.com/usernames/generator.html
 // Capitalizes first letter of each word
 String.prototype.capitalize = function() {
   return this.charAt(0).toUpperCase() + this.slice(1);
@@ -421,13 +399,6 @@ var pizzaElementGenerator = function(i) {
 };
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
-/**
-*Resizing Pizzas
-*resizePizzas function was a source of FSL
-*removed determineDx function
-*created randomPizzas variable so we don't need to query the DOM  for .randomPizzaContainer multiple times
-*removed layout-triggering properties from the changePizzaSizes for-loop
-*/
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
   // Changes the value for the size of the pizza above the slider
@@ -515,11 +486,6 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
-/**
-*Updating Positions on scroll
-*updatePositions was a source of FSL
-*moved phase calculation out of the for-loop
-*/
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
@@ -541,7 +507,6 @@ function updatePositions() {
 }
 
 // runs updatePositions on scroll
-
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
