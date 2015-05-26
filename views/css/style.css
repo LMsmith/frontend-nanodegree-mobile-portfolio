@@ -40,6 +40,14 @@ form {
   display: flex;
 }
 
+<<<<<<< HEAD
+=======
+.randomPizzaContainer img, ul {
+  will-change:translate;
+  transform:translateZ(0);
+}
+
+>>>>>>> gh-pages
 .randomPizzaContainer:after {
   content: "";
   display: table;
@@ -48,4 +56,8 @@ form {
 
  .container {
   background-color: rgba(240, 60, 60, 0.8);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> gh-pages
