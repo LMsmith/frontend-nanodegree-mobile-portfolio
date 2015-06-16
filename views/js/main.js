@@ -488,15 +488,28 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
+
+
+
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
   var items = document.getElementsByClassName('mover');
-  var itemsLength = items.length;
-  var phase = Math.sin(document.body.scrollTop / 1250);
-  for (var i = 0; i <  itemsLength; i++) {
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  //access scroll property outside of for-loop
+  var scrollDown = document.body.scrollTop;
+  //access screen width outside of for-loop
+  var screenWidth = screen.width;
+
+  var phases = [];
+  for(var i = 0 ; i < 5 ; i++) {
+    phases[i] = Math.sin(( scrollDown / screenWidth) + i);
+  }
+
+
+  for (var i = 0; i < items.length; i++) {
+    var numPixelsString = items[i].basicLeft - screenWidth * phases[i % 5] + 'px';
+    items[i].style.transform = 'translateX(' + numPixelsString + ')';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -517,9 +530,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var movingPizzas = document.querySelector("#movingPizzas1");
-  var elem = document.createElement('img');
   for (var i = 0; i < 200; i++) {
-    elem;
+    var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
