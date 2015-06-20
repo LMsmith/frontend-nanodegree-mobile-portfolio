@@ -436,12 +436,12 @@ var resizePizzas = function(size) {
         default:
           console.log("bug in sizeSwitcher");
       }
-    console.log(newWidth);
 
     // Iterates through pizza elements on the page and changes their widths
     var randomPizzas =  document.getElementsByClassName("randomPizzaContainer");
+    var randomPizzasLength =  randomPizzas.length;
     function changePizzaSizes(size) {
-      for (var i = 0; i < randomPizzas.length; i++) {
+      for (var i = 0; i < randomPizzasLength; i++) {
         randomPizzas[i].style.width = newWidth + "%";
       }
     }
@@ -498,18 +498,15 @@ function updatePositions() {
   var items = document.getElementsByClassName('mover');
   //access scroll property outside of for-loop
   var scrollDown = document.body.scrollTop;
-  //access screen width outside of for-loop
-  var screenWidth = screen.width;
 
   var phases = [];
   for(var i = 0 ; i < 5 ; i++) {
-    phases[i] = Math.sin(( scrollDown / screenWidth) + i);
+    phases[i] = Math.sin(( scrollDown / 1250) + i);
   }
 
-
-  for (var i = 0; i < items.length; i++) {
-    var numPixelsString = items[i].basicLeft - screenWidth * phases[i % 5] + 'px';
-    items[i].style.transform = 'translateX(' + numPixelsString + ')';
+var itemsLength =  items.length;
+  for (var i = 0; i < itemsLength; i++) {
+    items[i].style.transform = 'translateX('+ phases[i % 5] * 100 +')';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -530,8 +527,10 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var movingPizzas = document.querySelector("#movingPizzas1");
-  for (var i = 0; i < 200; i++) {
+
+  for (var i = 0; i < 40; i++) {
     var elem = document.createElement('img');
+    elem.style.left = (i % cols) * s + 'px';
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
@@ -539,7 +538,6 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     movingPizzas.appendChild(elem);
-    console.log(elem);
   }
   updatePositions();
 });
