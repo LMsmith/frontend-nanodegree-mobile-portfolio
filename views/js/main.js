@@ -499,14 +499,13 @@ function updatePositions() {
   //access scroll property outside of for-loop
   var scrollDown = document.body.scrollTop;
 
-  var phases = [];
-  for(var i = 0 ; i < 5 ; i++) {
-    phases[i] = Math.sin(( scrollDown / 1250) + i);
-  }
+  var phase = Math.sin(( scrollDown / 1250));
 
 var itemsLength =  items.length;
+
   for (var i = 0; i < itemsLength; i++) {
-    items[i].style.transform = 'translateX('+ phases[i % 5] * 100 +')';
+    var moveX = 100 * phase + 'px';
+    items[i].style.transform = 'translateX(' + moveX + ')';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -526,16 +525,19 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  var movingPizzas = document.querySelector("#movingPizzas1");
+  var movingPizzas = document.getElementById("movingPizzas1");
 
-  for (var i = 0; i < 40; i++) {
+  var viewportHeight = window.innerHeight;
+  var rows = viewportHeight/s;
+
+
+  for (var i = 0; i < rows * cols; i++) {
     var elem = document.createElement('img');
     elem.style.left = (i % cols) * s + 'px';
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     movingPizzas.appendChild(elem);
   }
