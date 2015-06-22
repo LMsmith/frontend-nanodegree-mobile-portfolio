@@ -499,13 +499,12 @@ function updatePositions() {
   //access scroll property outside of for-loop
   var scrollDown = document.body.scrollTop;
 
-  var phase = Math.sin(( scrollDown / 1250));
-
-var itemsLength =  items.length;
+  var itemsLength =  items.length;
 
   for (var i = 0; i < itemsLength; i++) {
-    var moveX = 100 * phase + 'px';
+    var moveX = 100 * Math.sin(scrollDown / 1250 + i % 5) + 'px';
     items[i].style.transform = 'translateX(' + moveX + ')';
+    //console.log(items[i].style.transform);
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
